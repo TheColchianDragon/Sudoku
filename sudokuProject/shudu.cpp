@@ -26,7 +26,7 @@ int a[9][9] = {
 	{ 0,0,0,0,0,0,0,0,0 },
 };
 
-void AddElement(int r, int c, int num)
+void add(int r, int c, int num)
 {
 	++first;
 	a[r][c] = num;
@@ -66,7 +66,7 @@ void AddElement(int r, int c, int num)
 	}
 }
 
-void RecoverElement(int row, int column, int num)
+void re(int row, int column, int num)
 {
 	a[row][column] = 0;
 	for (int i = 0; i<9; ++i)
@@ -123,7 +123,7 @@ void Init()
 		for (int j = 0; j<9; ++j)
 		{
 			if (a[i][j] != 0)
-				AddElement(i, j, a[i][j]);
+				add(i, j, a[i][j]);
 		}
 	}
 }
@@ -216,7 +216,7 @@ bool go(ofstream &ofs)
 		if (!second[row][column].test(i))
 			continue;
 
-		AddElement(row, column, i);
+		add(row, column, i);
 
 		if (go(ofs))
 		{
@@ -232,7 +232,7 @@ bool go(ofstream &ofs)
 		else
 			return false;
 
-		RecoverElement(row, column, i);
+		re(row, column, i);
 	}
 
 	return true;
