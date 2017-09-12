@@ -4,6 +4,8 @@
 #include<bitset>
 #include<time.h>
 #include <fstream>
+#include <stdlib.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -47,15 +49,15 @@ void add(int r, int c, int num)
 		}
 	}
 
-	int palaceRow = r>2 ? (r>5 ? 6 : 3) : 0;
-	int palaceColumn = c>2 ? (c>5 ? 6 : 3) : 0;
+	int pr = r>2 ? (r>5 ? 6 : 3) : 0;
+	int pc = c>2 ? (c>5 ? 6 : 3) : 0;
 
 	for (int i = 0; i<3; ++i)
 	{
 		for (int j = 0; j<3; ++j)
 		{
-			r = palaceRow + i;
-			c = palaceColumn + j;
+			r = pr + i;
+			c = pc + j;
 			if (a[r][c] == 0 && second[r][c].test(num))
 			{
 				second[r][c].reset(num);
@@ -86,15 +88,15 @@ void re(int row, int column, int num)
 		}
 	}
 
-	int palaceRow = row>2 ? (row>5 ? 6 : 3) : 0;
-	int palaceColumn = column>2 ? (column>5 ? 6 : 3) : 0;
+	int pr = row>2 ? (row>5 ? 6 : 3) : 0;
+	int pc = column>2 ? (column>5 ? 6 : 3) : 0;
 
 	for (int i = 0; i<3; ++i)
 	{
 		for (int j = 0; j<3; ++j)
 		{
-			row = palaceRow + i;
-			column = palaceColumn + j;
+			row = pr + i;
+			column = pc + j;
 			if (a[row][column] == 0 && flags[row][column].test(first))
 			{
 				second[row][column].set(num);
@@ -238,10 +240,10 @@ bool go(ofstream &ofs)
 	return true;
 }
 
-int main()
+int main(int argc, char * argv[])
 {
 	ofstream mycout("sudoku.txt");
-	cin >> n;
+	n=atoi(argv[2]);
 	Init();
 	go(mycout);
 	return 0;
